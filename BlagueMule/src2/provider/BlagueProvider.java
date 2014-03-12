@@ -6,6 +6,7 @@ import exceptions.BlagueAbsenteException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -102,11 +103,31 @@ public class BlagueProvider implements BlagueProviderInterface
 
             // On cree un objet de type BlagueProvider qui servira de client et de serveur auquel on passe la liste par defaut
             
-            BlagueProvider bp = new BlagueProvider(listeBlagues);
+            BlagueProvider provider = new BlagueProvider(listeBlagues);
+            
+            // -------------------
+            // ----- SERVEUR -----
+            // -------------------
             
             // On exporte une reference distante de type BlagueProviderInterface
             
-            //BlagueProviderInterface proxy = 
+            BlagueProviderInterface proxy = (BlagueProviderInterface) UnicastRemoteObject.exportObject(provider,0);
+            
+            // On recupere une reference sur la RMI Registry
+            
+            Registry reg = LocateRegistry.getRegistry();
+            
+            // On enregistre cette référence distante dans la RMI Registry sous le nom passe en parametre
+            
+            reg.rebind(nom,proxy);
+            
+            // ------------------
+            // ----- CLIENT -----
+            // ------------------
+            
+            // 
+            
+            // 
         }
         catch (Exception e)
         {
