@@ -15,7 +15,7 @@ public class BlagueProviderClient
             String host = (args.length < 1) ? "localhost" : args[0];
             
             // 1 - Le client crée un objet de type BlagueProviderClient
-            BlagueProviderClient client = new BlagueProviderClient();
+            //BlagueProviderClient client = new BlagueProviderClient();
             
             // 2 - On creé un proxy de l'objet Receiver
             //BlagueProviderInterface proxy = (BlagueProviderInterface)UnicastRemoteObject.exportObject(client,0);
