@@ -1,9 +1,9 @@
 package serveur;
 
 import blague.Blague;
-import client.BlagueAbsenteException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import serveur.BlagueAbsenteException;
 
 public interface BlagueProviderInterface extends Remote
 {
