@@ -14,19 +14,29 @@ public class Blague implements Serializable
         question = q;
         reponse = r;
     }
-    
-    public String getNom()
-    {
+
+    public String getNom() {
         return nom;
     }
-    
-    public String getQuestion()
-    {
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getQuestion() {
         return question;
     }
-    
-    public String getReponse()
-    {
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getReponse() {
         return reponse;
     }
+
+    public void setReponse(String reponse) {
+        this.reponse = reponse;
+    }
+    
 }
