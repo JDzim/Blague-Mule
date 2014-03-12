@@ -4,42 +4,109 @@ import blague.Blague;
 import codebase.BlagueProviderInterface;
 import exceptions.BlagueAbsenteException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BlagueProvider implements BlagueProviderInterface
 {
+    private HashMap<String,Blague> repertoireBlagues;
+    
     public BlagueProvider()
     {
+        repertoireBlagues = new HashMap();
+    }
+    
+    public BlagueProvider(HashMap<String,Blague> hm)
+    {
+        repertoireBlagues = hm;
+    }
+    
+    @Override
+    public String[] getAllName() throws Exception
+    {
+        String[] blagues = new String[0];
+        ArrayList<String> al_blagues = new ArrayList();
         
+        try
+        {
+            for (Map.Entry<String,Blague> e : repertoireBlagues.entrySet())
+            {
+                al_blagues.add(e.getKey());
+            }
+            
+            blagues = al_blagues.toArray(blagues);
+        }
+        catch (Exception e)
+        {
+            System.out.println("EXCEPTION - GetAllName");
+            e.printStackTrace();
+        }
+        
+        if (blagues != null)
+            return blagues;
+        else
+            throw new BlagueAbsenteException("BLAGUE_ABSENTE_EXCEPTION - GetAllName");
     }
     
     @Override
-    public String[] getAllName() throws Exception, RemoteException
+    public Blague getBlague(String n) throws BlagueAbsenteException
     {
-        return null;
-    }
-    
-    @Override
-    public Blague getBlague(String n) throws BlagueAbsenteException, RemoteException
-    {
-        return null;
+        Blague blague = null;
+        
+        try
+        {
+            blague = repertoireBlagues.get((String)n);
+            System.out.println(blague.getNom()+"\n"+blague.getQuestion()+"\n"+blague.getReponse());
+        }
+        catch (Exception e)
+        {
+            System.out.println("EXCEPTION - GetBlague");
+            e.printStackTrace();
+        }
+        
+        if (blague != null)
+            return blague;
+        else
+            throw new BlagueAbsenteException("BLAGUE_ABSENTE_EXCEPTION - GetBlague");
     }
     
     public static void main(String[] args)
     {
         try
-        {
+        {                        
+            // On initialise une liste de blagues par defaut
+            
+            String titre1 = "MonTitreDeBlague1";
+            String titre2 = "MonTitreDeBlague2";
+            String titre3 = "MonTitreDeBlague3";
+            
+            HashMap<String,Blague> listeBlagues = new HashMap();
+            listeBlagues.put(titre1, new Blague(titre1,"Qui suis-je ?","Une 1ere blague !"));
+            listeBlagues.put(titre2, new Blague(titre2,"Qui suis-je ?","Une 2nde blague !"));
+            listeBlagues.put(titre3, new Blague(titre3,"Qui suis-je ?","Une 3eme blague !"));            
+
             // On recupere le nom de notre provider (args[0])
+            
             String nom = args[0];
             ArrayList<String> autresProviders = new ArrayList<>();
 
             // On recupere le nom de tous les autres providers (args[1] à args[args.length-1])
+            
             for (int i = 1 ; i < args.length ; i++)
             {
                 autresProviders.add(args[i]);
             }
 
-            BlagueProvider bp = new BlagueProvider();
+            // On cree un objet de type BlagueProvider qui servira de client et de serveur auquel on passe la liste par defaut
+            
+            BlagueProvider bp = new BlagueProvider(listeBlagues);
+            
+            // On exporte une reference distante de type BlagueProviderInterface
+            
+            //BlagueProviderInterface proxy = 
         }
         catch (Exception e)
         {
