@@ -100,6 +100,7 @@ public class BlagueProvider implements BlagueProviderP2P
             throw new BlagueAbsenteException("BLAGUE_ABSENTE_EXCEPTION - GetBlague");
     }
     
+    // A TESTER !!
     public static void main(String[] args)
     {
         try
@@ -162,8 +163,33 @@ public class BlagueProvider implements BlagueProviderP2P
                 provider.addProxy(autreProxy);
             }
             
-            // On demande au proxy de nous fournir le tableau des blagues, on en choisit une, on demande au proxy la blague choisie, on l'affiche
-            //String[] annuaire = proxy.getAllName();
+            // --------------------------------
+            // ----- ACTIONS DIVERSES P2P -----
+            // --------------------------------
+            
+            // On demande au proxy de nous fournir les blagues de notre client P2P
+            
+            System.out.println("Mon repertoire de blagues (interne)");
+            String[] repertoireInterne = provider.getAllName();
+            
+            // On affiche nos blagues internes
+            
+            for (int i = 0 ; i < repertoireInterne.length ; i++)
+            {
+                System.out.println(repertoireInterne[i]);
+            }
+            
+            // On demande au proxy etranger de nous fournir les blagues d'un autre client P2P
+            
+            System.out.println("Un autre repertoire de blagues (externe)");
+            String[] repertoireExterne = provider.repertoireProxy.get(1).getAllName();
+            
+            // On affiche les blagues externes
+            
+            for (int i = 0 ; i < repertoireExterne.length ; i++)
+            {
+                System.out.println(repertoireExterne[i]);
+            }
         }
         catch (Exception e)
         {
