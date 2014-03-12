@@ -9,23 +9,40 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import serveur.BlagueProviderInterface;
 
 public class BlagueProvider implements BlagueProviderP2P
 {
     private String nom;
+    private ArrayList<BlagueProviderP2P> repertoireProxy;
     private HashMap<String,Blague> repertoireBlagues;
     
     public BlagueProvider(String n)
     {
         nom = n;
+        repertoireProxy = new ArrayList();
         repertoireBlagues = new HashMap();
     }
     
     public BlagueProvider(String n, HashMap<String,Blague> hm)
     {
         nom = n;
+        repertoireProxy = new ArrayList();
         repertoireBlagues = hm;
+    }
+    
+    @Override
+    public void addBlague(Blague b)
+    {
+        repertoireBlagues.put(b.getNom(), b);
+    }
+    
+    @Override
+    public void addProxy(BlagueProviderP2P proxy)
+    {
+        repertoireProxy.add(proxy);
     }
     
     @Override
@@ -101,13 +118,13 @@ public class BlagueProvider implements BlagueProviderP2P
             // On recupere le nom de notre provider (args[0])
             
             String nom = args[0];
-            ArrayList<String> autresProviders = new ArrayList<>();
+            ArrayList<String> autresNomsProviders = new ArrayList<>();
 
             // On recupere le nom de tous les autres providers (args[1] à args[args.length-1])
             
             for (int i = 1 ; i < args.length ; i++)
             {
-                autresProviders.add(args[i]);
+                autresNomsProviders.add(args[i]);
             }
 
             // On cree un objet de type BlagueProvider qui servira de client et de serveur auquel on passe la liste par defaut
@@ -136,14 +153,16 @@ public class BlagueProvider implements BlagueProviderP2P
             
             // Pour chacun des autres noms passes en parametres, on cree un proxy
 
-            // 1 - On creé un proxy de l'objet Receiver
-            //BlagueProviderInterface proxy = (BlagueProviderP2P)UnicastRemoteObject.exportObject(client,0);
+            Iterator it = autresNomsProviders.iterator();
             
-            // 2 - On récupère la registry du serveur (lookup)
-            //Registry reg = LocateRegistry.getRegistry(host);
-            //serveur.BlagueProviderInterface proxy = (serveur.BlagueProviderInterface) reg.lookup("BlagueProvider");
+            while (it.hasNext())
+            {
+                String nomAutreProvider = (String) it.next();
+                BlagueProviderP2P autreProxy = (BlagueProviderP2P) reg.lookup(nomAutreProvider);
+                provider.addProxy(autreProxy);
+            }
             
-            // 3 - On demande au proxy de nous fournir le tableau des blagues, on en choisit une, on demande au proxy la blague choisie, on l'affiche
+            // On demande au proxy de nous fournir le tableau des blagues, on en choisit une, on demande au proxy la blague choisie, on l'affiche
             //String[] annuaire = proxy.getAllName();
         }
         catch (Exception e)
