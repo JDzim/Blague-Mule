@@ -10,7 +10,7 @@ public class BlagueProvider
         String nom = args[0];
         ArrayList<String> autresProviders = new ArrayList<>();
         
-        // On recupere le nom de tou les autres providers (args[1] à args[args.length-1])
+        // On recupere le nom de tous les autres providers (args[1] à args[args.length-1])
         for (int i = 1 ; i < args.length ; i++)
         {
             autresProviders.add(args[i]);
