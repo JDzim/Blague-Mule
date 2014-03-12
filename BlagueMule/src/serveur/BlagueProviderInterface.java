@@ -1,7 +1,7 @@
-package codebase;
+package serveur;
 
 import blague.Blague;
-import exceptions.BlagueAbsenteException;
+import client.BlagueAbsenteException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
