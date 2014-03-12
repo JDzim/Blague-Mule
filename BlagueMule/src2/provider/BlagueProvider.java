@@ -1,7 +1,7 @@
 package provider;
 
 import blague.Blague;
-import codebase.BlagueProviderInterface;
+import codebase.BlagueProviderP2P;
 import exceptions.BlagueAbsenteException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -11,18 +11,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlagueProvider implements BlagueProviderInterface
+public class BlagueProvider implements BlagueProviderP2P
 {
+    private String nom;
     private HashMap<String,Blague> repertoireBlagues;
     
-    public BlagueProvider()
+    public BlagueProvider(String n)
     {
+        nom = n;
         repertoireBlagues = new HashMap();
     }
     
-    public BlagueProvider(HashMap<String,Blague> hm)
+    public BlagueProvider(String n, HashMap<String,Blague> hm)
     {
+        nom = n;
         repertoireBlagues = hm;
+    }
+    
+    @Override
+    public String getProvidersName()
+    {
+        return nom;
     }
     
     @Override
@@ -103,15 +112,15 @@ public class BlagueProvider implements BlagueProviderInterface
 
             // On cree un objet de type BlagueProvider qui servira de client et de serveur auquel on passe la liste par defaut
             
-            BlagueProvider provider = new BlagueProvider(listeBlagues);
+            BlagueProvider provider = new BlagueProvider(nom, listeBlagues);
             
+            // On exporte une reference distante de type BlagueProviderP2P
+            
+            BlagueProviderP2P proxy = (BlagueProviderP2P) UnicastRemoteObject.exportObject(provider,0);
+
             // -------------------
             // ----- SERVEUR -----
             // -------------------
-            
-            // On exporte une reference distante de type BlagueProviderInterface
-            
-            BlagueProviderInterface proxy = (BlagueProviderInterface) UnicastRemoteObject.exportObject(provider,0);
             
             // On recupere une reference sur la RMI Registry
             
@@ -119,15 +128,23 @@ public class BlagueProvider implements BlagueProviderInterface
             
             // On enregistre cette référence distante dans la RMI Registry sous le nom passe en parametre
             
-            reg.rebind(nom,proxy);
+            reg.rebind(provider.getProvidersName(),proxy);
             
             // ------------------
             // ----- CLIENT -----
             // ------------------
             
-            // 
+            // Pour chacun des autres noms passes en parametres, on cree un proxy
+
+            // 1 - On creé un proxy de l'objet Receiver
+            //BlagueProviderInterface proxy = (BlagueProviderP2P)UnicastRemoteObject.exportObject(client,0);
             
-            // 
+            // 2 - On récupère la registry du serveur (lookup)
+            //Registry reg = LocateRegistry.getRegistry(host);
+            //serveur.BlagueProviderInterface proxy = (serveur.BlagueProviderInterface) reg.lookup("BlagueProvider");
+            
+            // 3 - On demande au proxy de nous fournir le tableau des blagues, on en choisit une, on demande au proxy la blague choisie, on l'affiche
+            //String[] annuaire = proxy.getAllName();
         }
         catch (Exception e)
         {

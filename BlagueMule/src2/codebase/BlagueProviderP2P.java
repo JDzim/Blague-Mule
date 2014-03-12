@@ -5,8 +5,10 @@ import exceptions.BlagueAbsenteException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface BlagueProviderInterface extends Remote
+public interface BlagueProviderP2P extends Remote
 {
+    public String getProvidersName();
+    
     public String[] getAllName() throws Exception, RemoteException;
     
     public Blague getBlague(String n) throws BlagueAbsenteException, RemoteException;
