@@ -1,7 +1,7 @@
 package client;
 
+import serveur.BlagueProviderInterface;
 import blague.Blague;
-import codebase.BlagueProviderInterface;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

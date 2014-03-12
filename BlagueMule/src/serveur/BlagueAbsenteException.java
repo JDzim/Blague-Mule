@@ -1,4 +1,4 @@
-package exceptions;
+package serveur;
 
 public class BlagueAbsenteException extends Exception 
 {
