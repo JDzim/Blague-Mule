@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ../src
+cd ../src2
 
 echo ""
 echo "PACKAGE BLAGUE"
