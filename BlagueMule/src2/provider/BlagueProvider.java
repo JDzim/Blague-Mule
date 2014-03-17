@@ -3,46 +3,41 @@ package provider;
 import blague.Blague;
 import codebase.BlagueProviderP2P;
 import exceptions.BlagueAbsenteException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import serveur.BlagueProviderInterface;
 
 public class BlagueProvider implements BlagueProviderP2P
 {
-    private String nom;
-    private ArrayList<BlagueProviderP2P> repertoireProxy;
-    private HashMap<String,Blague> repertoireBlagues;
+    private final String nom;
+    private final HashMap<String, BlagueProviderP2P> repertoireProxy;
+    private final HashMap<String, Blague> listeRef;
     
-    public BlagueProvider(String n)
+    public BlagueProvider(String nom)
     {
-        nom = n;
-        repertoireProxy = new ArrayList();
-        repertoireBlagues = new HashMap();
+        this.nom = nom;
+        this.repertoireProxy = new HashMap<>();
+        this.listeRef = new HashMap<>();
     }
     
-    public BlagueProvider(String n, HashMap<String,Blague> hm)
+    public BlagueProvider(String nom, HashMap<String,Blague> listeRef)
     {
-        nom = n;
-        repertoireProxy = new ArrayList();
-        repertoireBlagues = hm;
+        this.nom = nom;
+        this.repertoireProxy = new HashMap<>();
+        this.listeRef = listeRef;
     }
     
-    @Override
-    public void addBlague(Blague b)
+    public void addBlague(Blague blague)
     {
-        repertoireBlagues.put(b.getNom(), b);
+        listeRef.put(blague.getNom(), blague);
     }
     
-    @Override
-    public void addProxy(BlagueProviderP2P proxy)
+    public void addProxy(String nomProxy, BlagueProviderP2P proxy)
     {
-        repertoireProxy.add(proxy);
+        repertoireProxy.put(nomProxy, proxy);
     }
     
     @Override
@@ -52,25 +47,19 @@ public class BlagueProvider implements BlagueProviderP2P
     }
     
     @Override
-    public String[] getAllName() throws Exception
+    public String[] getAllName() throws BlagueAbsenteException
     {
         String[] blagues = new String[0];
         ArrayList<String> al_blagues = new ArrayList();
         
-        try
+        
+        for (Map.Entry<String,Blague> e : listeRef.entrySet())
         {
-            for (Map.Entry<String,Blague> e : repertoireBlagues.entrySet())
-            {
-                al_blagues.add(e.getKey());
-            }
-            
-            blagues = al_blagues.toArray(blagues);
+            al_blagues.add(e.getKey());
         }
-        catch (Exception e)
-        {
-            System.out.println("EXCEPTION - GetAllName");
-            e.printStackTrace();
-        }
+
+        blagues = al_blagues.toArray(blagues);
+        
         
         if (blagues != null)
             return blagues;
@@ -81,23 +70,21 @@ public class BlagueProvider implements BlagueProviderP2P
     @Override
     public Blague getBlague(String n) throws BlagueAbsenteException
     {
-        Blague blague = null;
+        Blague blague;
         
-        try
-        {
-            blague = repertoireBlagues.get((String)n);
+        blague = listeRef.get((String)n);
+        
+        if (blague != null) {
             System.out.println(blague.getNom()+"\n"+blague.getQuestion()+"\n"+blague.getReponse());
-        }
-        catch (Exception e)
-        {
-            System.out.println("EXCEPTION - GetBlague");
-            e.printStackTrace();
-        }
-        
-        if (blague != null)
             return blague;
-        else
+        } else {
             throw new BlagueAbsenteException("BLAGUE_ABSENTE_EXCEPTION - GetBlague");
+        }
+    }
+    
+    public void telechargerBlague(String nomBlague, BlagueProvider proxy) throws BlagueAbsenteException
+    {
+        listeRef.put(nomBlague, proxy.getBlague(nomBlague));
     }
     
     // A TESTER !!
@@ -154,13 +141,10 @@ public class BlagueProvider implements BlagueProviderP2P
             
             // Pour chacun des autres noms passes en parametres, on cree un proxy
 
-            Iterator it = autresNomsProviders.iterator();
-            
-            while (it.hasNext())
+            for (String nomAutreProvider : autresNomsProviders)
             {
-                String nomAutreProvider = (String) it.next();
                 BlagueProviderP2P autreProxy = (BlagueProviderP2P) reg.lookup(nomAutreProvider);
-                provider.addProxy(autreProxy);
+                provider.addProxy(nomAutreProvider, autreProxy);
             }
             
             // --------------------------------
@@ -174,9 +158,9 @@ public class BlagueProvider implements BlagueProviderP2P
             
             // On affiche nos blagues internes
             
-            for (int i = 0 ; i < repertoireInterne.length ; i++)
+            for (String name : repertoireInterne)
             {
-                System.out.println(repertoireInterne[i]);
+                System.out.println(name);
             }
             
             // On demande au proxy etranger de nous fournir les blagues d'un autre client P2P
@@ -186,9 +170,9 @@ public class BlagueProvider implements BlagueProviderP2P
             
             // On affiche les blagues externes
             
-            for (int i = 0 ; i < repertoireExterne.length ; i++)
+            for (String name : repertoireExterne)
             {
-                System.out.println(repertoireExterne[i]);
+                System.out.println(name);
             }
         }
         catch (Exception e)
