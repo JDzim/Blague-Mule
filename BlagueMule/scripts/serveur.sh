@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd ../build/classes
+cd ../bin1/AppliServeur
 java serveur.BlagueProviderServeur $1
 

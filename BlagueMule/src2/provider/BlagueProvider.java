@@ -41,7 +41,7 @@ public class BlagueProvider implements BlagueProviderP2P
     }
     
     @Override
-    public String getProvidersName()
+    public String getNom()
     {
         return nom;
     }
@@ -133,7 +133,7 @@ public class BlagueProvider implements BlagueProviderP2P
             
             // On enregistre cette référence distante dans la RMI Registry sous le nom passe en parametre
             
-            reg.rebind(provider.getProvidersName(),proxy);
+            reg.rebind(provider.getNom(),proxy);
             
             // ------------------
             // ----- CLIENT -----

@@ -11,7 +11,7 @@ public interface BlagueProviderP2P extends Remote
     
     //public void addProxy(String nomProxy, BlagueProviderP2P proxy);
     
-    public String getProvidersName();
+    public String getNom();
     
     public String[] getAllName() throws Exception, RemoteException;
     

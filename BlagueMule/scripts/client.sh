@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd ../build/classes
+cd ../bin1/AppliClient
 java client.BlagueProviderClient $1
 
