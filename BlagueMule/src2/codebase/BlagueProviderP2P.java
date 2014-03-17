@@ -9,7 +9,7 @@ public interface BlagueProviderP2P extends Remote
 {
     public void addBlague(Blague b);
     
-    public void addProxy(BlagueProviderP2P proxy);
+    public void addProxy(String nomProxy, BlagueProviderP2P proxy);
     
     public String getProvidersName();
     
