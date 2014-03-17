@@ -2,7 +2,8 @@ package provider;
 
 import blague.Blague;
 import codebase.BlagueProviderP2P;
-import exceptions.BlagueAbsenteException;
+import codebase.BlagueAbsenteException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
@@ -41,7 +42,7 @@ public class BlagueProvider implements BlagueProviderP2P
     }
     
     @Override
-    public String getNom()
+    public String getNom() throws RemoteException
     {
         return nom;
     }
@@ -97,6 +98,11 @@ public class BlagueProvider implements BlagueProviderP2P
             String titre1 = "MonTitreDeBlague1";
             String titre2 = "MonTitreDeBlague2";
             String titre3 = "MonTitreDeBlague3";
+            if (args[1].compareTo("azer") == 0) {
+                titre1 = "MonTitreDeBlague4";
+                titre2 = "MonTitreDeBlague5";
+                titre3 = "MonTitreDeBlague6";
+            }
             
             HashMap<String,Blague> listeBlagues = new HashMap();
             listeBlagues.put(titre1, new Blague(titre1,"Qui suis-je ?","Une 1ere blague !"));
@@ -140,9 +146,10 @@ public class BlagueProvider implements BlagueProviderP2P
             // ------------------
             
             // Pour chacun des autres noms passes en parametres, on cree un proxy
-
+            System.in.read();
             for (String nomAutreProvider : autresNomsProviders)
             {
+                System.out.println(nomAutreProvider);
                 BlagueProviderP2P autreProxy = (BlagueProviderP2P) reg.lookup(nomAutreProvider);
                 provider.addProxy(nomAutreProvider, autreProxy);
             }
@@ -166,7 +173,7 @@ public class BlagueProvider implements BlagueProviderP2P
             // On demande au proxy etranger de nous fournir les blagues d'un autre client P2P
             
             System.out.println("Un autre repertoire de blagues (externe)");
-            String[] repertoireExterne = provider.repertoireProxy.get(((int) Math.random() * provider.repertoireProxy.size()) + 1).getAllName();
+            String[] repertoireExterne = provider.repertoireProxy.get(args[1]).getAllName();
             
             // On affiche les blagues externes
             

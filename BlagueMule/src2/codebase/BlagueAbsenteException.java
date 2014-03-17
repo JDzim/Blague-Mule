@@ -1,4 +1,4 @@
-package exceptions;
+package codebase;
 
 public class BlagueAbsenteException extends Exception 
 {
