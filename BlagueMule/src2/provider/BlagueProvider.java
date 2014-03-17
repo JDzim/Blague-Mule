@@ -92,7 +92,7 @@ public class BlagueProvider implements BlagueProviderP2P
     public static void main(String[] args)
     {
         try
-        {                        
+        {    
             // On initialise une liste de blagues par defaut
             
             String titre1 = "MonTitreDeBlague1";
