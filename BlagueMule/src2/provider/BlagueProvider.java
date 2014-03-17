@@ -166,7 +166,7 @@ public class BlagueProvider implements BlagueProviderP2P
             // On demande au proxy etranger de nous fournir les blagues d'un autre client P2P
             
             System.out.println("Un autre repertoire de blagues (externe)");
-            String[] repertoireExterne = provider.repertoireProxy.get(1).getAllName();
+            String[] repertoireExterne = provider.repertoireProxy.get(((int) Math.random() * provider.repertoireProxy.size()) + 1).getAllName();
             
             // On affiche les blagues externes
             
