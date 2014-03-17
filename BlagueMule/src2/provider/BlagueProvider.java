@@ -47,25 +47,19 @@ public class BlagueProvider implements BlagueProviderP2P
     }
     
     @Override
-    public String[] getAllName() throws Exception
+    public String[] getAllName() throws BlagueAbsenteException
     {
         String[] blagues = new String[0];
         ArrayList<String> al_blagues = new ArrayList();
         
-        try
+        
+        for (Map.Entry<String,Blague> e : listeRef.entrySet())
         {
-            for (Map.Entry<String,Blague> e : listeRef.entrySet())
-            {
-                al_blagues.add(e.getKey());
-            }
-            
-            blagues = al_blagues.toArray(blagues);
+            al_blagues.add(e.getKey());
         }
-        catch (Exception e)
-        {
-            System.out.println("EXCEPTION - GetAllName");
-            e.printStackTrace();
-        }
+
+        blagues = al_blagues.toArray(blagues);
+        
         
         if (blagues != null)
             return blagues;
@@ -76,23 +70,21 @@ public class BlagueProvider implements BlagueProviderP2P
     @Override
     public Blague getBlague(String n) throws BlagueAbsenteException
     {
-        Blague blague = null;
+        Blague blague;
         
-        try
-        {
-            blague = listeRef.get((String)n);
+        blague = listeRef.get((String)n);
+        
+        if (blague != null) {
             System.out.println(blague.getNom()+"\n"+blague.getQuestion()+"\n"+blague.getReponse());
-        }
-        catch (Exception e)
-        {
-            System.out.println("EXCEPTION - GetBlague");
-            e.printStackTrace();
-        }
-        
-        if (blague != null)
             return blague;
-        else
+        } else {
             throw new BlagueAbsenteException("BLAGUE_ABSENTE_EXCEPTION - GetBlague");
+        }
+    }
+    
+    public void telechargerBlague(String nomBlague, BlagueProvider proxy) throws BlagueAbsenteException
+    {
+        listeRef.put(nomBlague, proxy.getBlague(nomBlague));
     }
     
     // A TESTER !!
@@ -166,9 +158,9 @@ public class BlagueProvider implements BlagueProviderP2P
             
             // On affiche nos blagues internes
             
-            for (int i = 0 ; i < repertoireInterne.length ; i++)
+            for (String name : repertoireInterne)
             {
-                System.out.println(repertoireInterne[i]);
+                System.out.println(name);
             }
             
             // On demande au proxy etranger de nous fournir les blagues d'un autre client P2P
@@ -178,9 +170,9 @@ public class BlagueProvider implements BlagueProviderP2P
             
             // On affiche les blagues externes
             
-            for (int i = 0 ; i < repertoireExterne.length ; i++)
+            for (String name : repertoireExterne)
             {
-                System.out.println(repertoireExterne[i]);
+                System.out.println(name);
             }
         }
         catch (Exception e)
