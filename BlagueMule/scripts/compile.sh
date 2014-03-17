@@ -6,16 +6,12 @@
 #javac 	-d 	../build/classes/exceptions 	../src/exceptions/*.java
 #javac 	-d 	../build/classes/serveur 	../src/serveur/*.java
 
-cd ../src
+cd ../src2
 
 echo ""
 echo "PACKAGE BLAGUE"
 echo ""
 javac 	-d	../build/classes	blague/*.java
-echo ""
-echo "PACKAGE CLIENT"
-echo ""
-javac 	-d 	../build/classes 	client/*.java
 echo ""
 echo "PACKAGE CODEBASE"
 echo ""
@@ -25,8 +21,8 @@ echo "PACKAGE EXCEPTIONS"
 echo ""
 javac 	-d 	../build/classes 	exceptions/*.java
 echo ""
-echo "PACKAGE SERVEUR"
+echo "PACKAGE PROVIDER"
 echo ""
-javac 	-d 	../build/classes 	serveur/*.java
+javac 	-d 	../build/classes 	provider/*.java
 echo ""
 
