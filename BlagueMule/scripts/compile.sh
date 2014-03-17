@@ -17,10 +17,6 @@ echo "PACKAGE CODEBASE"
 echo ""
 javac 	-d 	../build/classes 	codebase/*.java
 echo ""
-echo "PACKAGE EXCEPTIONS"
-echo ""
-javac 	-d 	../build/classes 	exceptions/*.java
-echo ""
 echo "PACKAGE PROVIDER"
 echo ""
 javac 	-d 	../build/classes 	provider/*.java
