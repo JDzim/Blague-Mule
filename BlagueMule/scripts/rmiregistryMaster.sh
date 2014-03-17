@@ -3,6 +3,10 @@
 cd ../src2
 
 echo ""
+echo "PACKAGE IHM"
+echo ""
+javac 	-d 	../build/classes 	*.java
+echo ""
 echo "PACKAGE BLAGUE"
 echo ""
 javac 	-d	../build/classes	blague/*.java
@@ -13,9 +17,8 @@ javac 	-d 	../build/classes 	codebase/*.java
 echo ""
 echo "PACKAGE PROVIDER"
 echo ""
-javac 	-d 	../build/classes 	provider/*.java
+javac 	-d	../build/classes	provider/*.java
 echo ""
-
 
 cd ../build/classes
 rmiregistry
