@@ -165,7 +165,7 @@ public class InterfaceGraphique extends JFrame{
 	 */
 	public void MaJBlagues()
 	{
-		
+		//blaguesLocales
 	}
 	
 	/**
@@ -174,7 +174,7 @@ public class InterfaceGraphique extends JFrame{
 	 */
 	public void MaJServeurs()
 	{
-		
+		//serveurs
 	}
 	
 	/**
@@ -183,7 +183,7 @@ public class InterfaceGraphique extends JFrame{
 	 */
 	public void MaJBlagueDist()
 	{
-		
+		//blaguesDistantes
 	}
 	
 	
