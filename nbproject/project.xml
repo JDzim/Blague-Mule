@@ -5,8 +5,9 @@
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>BlagueMule</name>
             <source-roots>
-                <root id="src.src2.dir"/>
-                <root id="src.dir"/>
+                <root id="src.src3.dir" name="SRC Version 3"/>
+                <root id="src.src2.dir" name="SRC Version 2"/>
+                <root id="src.dir" name="SRC Version 1"/>
             </source-roots>
             <test-roots/>
         </data>
