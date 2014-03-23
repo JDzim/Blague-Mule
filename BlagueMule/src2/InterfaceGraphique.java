@@ -20,25 +20,25 @@ import provider.BlagueProvider;
 public class InterfaceGraphique extends JFrame{
 	
 	/**
-	 * blague provider observ?
+	 * blague provider observé
 	 */
 	public BlagueProvider bp;
 	
 	/**
-	 * la liste ? gerer pour l'affichage des blagues locales
-	 * mise ? jour avec MaJBlagues() 
+	 * la liste à gerer pour l'affichage des blagues locales
+	 * mise à jour avec MaJBlagues() 
 	 */
 	JList blaguesLocales; 
 	
 	/**
-	 * la liste ? gerer pour l'affichage des blagues distantes
-	 * mise ? jour avec MaJBlaguesDistantes() 
+	 * la liste à gerer pour l'affichage des blagues distantes
+	 * mise à jour avec MaJBlaguesDistantes() 
 	 */
 	JList blaguesDistantes; 
 	
 	/**
-	 * la liste ? gerer pour l'affichage des serveurs
-	 * mise ? jour avec MaJServeurs() 
+	 * la liste à gerer pour l'affichage des serveurs
+	 * mise à jour avec MaJServeurs() 
 	 */
 	JList serveurs;
 	
@@ -47,7 +47,7 @@ public class InterfaceGraphique extends JFrame{
 	
 	
 	/**
-	 * ajoute l'onglet distant ? l'interface
+	 * ajoute l'onglet distant à l'interface
 	 */
 	public JPanel ongletDistant()
 	{
@@ -76,7 +76,7 @@ public class InterfaceGraphique extends JFrame{
 		blaguesDistantes=new JList();
 		blaguesDistantes.setPreferredSize(new Dimension(300,200));
 		PblaguesDistantes.add(blaguesDistantes);
-		//ajoute ? la boite
+		//ajoute à la boite
 		distant.add(PblaguesDistantes);
 		
 		// bouton de sauvegarde
@@ -92,7 +92,7 @@ public class InterfaceGraphique extends JFrame{
 	
 	
 	/**
-	 * ajoute l'onglet local ? l'interface
+	 * ajoute l'onglet local à l'interface
 	 */
 	public JPanel ongletLocal()
 	{
@@ -145,7 +145,7 @@ public class InterfaceGraphique extends JFrame{
 	{
 		super("Blaguemule: "+nom);
 		
-		//mise ? jour du lien vers le modele
+		//mise à jour du lien vers le modele
 		this.bp=bp;
 		
 		//construction de l'interface
@@ -162,8 +162,8 @@ public class InterfaceGraphique extends JFrame{
 	
 	
 	/**
-	 * methode charg?e de mettre ? jour l'affichage des blagues
-	 * ? partir de bp
+	 * methode chargée de mettre à jour l'affichage des blagues
+	 * à partir de bp
 	 */
 	public void MaJBlagues()
 	{
@@ -171,8 +171,8 @@ public class InterfaceGraphique extends JFrame{
 	}
 	
 	/**
-	 * methode charg?e de mettre ? jour l'affichage des serveurs
-	 * ? partir de bp quand lisRef est modifi?
+	 * methode charg?ée de mettre à jour l'affichage des serveurs
+	 * à partir de bp quand lisRef est modifié
 	 */
 	public void MaJServeurs()
 	{
@@ -180,7 +180,7 @@ public class InterfaceGraphique extends JFrame{
 	}
 	
 	/**
-	 * methode charg?e de mettre ? jour l'affichage des blagues distantes
+	 * methode chargée de mettre à jour l'affichage des blagues distantes
 	 * quand on selectionne un listeref
 	 */
 	public void MaJBlagueDist()
