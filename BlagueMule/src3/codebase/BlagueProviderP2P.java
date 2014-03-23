@@ -20,7 +20,7 @@ public interface BlagueProviderP2P extends Remote
     
     public Blague getBlague(String nom) throws BlagueAbsenteException, RemoteException;
     
-    public void notify(BlagueProviderP2P ref);
+    public void notify(BlagueProviderP2P ref) throws RemoteException;
     
-    public void notifyDeconnect(BlagueProviderP2P ref);
+    public void notifyDeconnect(BlagueProviderP2P ref) throws RemoteException;
 }

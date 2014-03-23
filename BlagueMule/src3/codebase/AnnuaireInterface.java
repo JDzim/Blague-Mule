@@ -7,7 +7,8 @@ import java.rmi.RemoteException;
  * @author Joseph DZIMBALKA
  * @author Julien RISCHE
  */
-public interface AnnuaireInterface extends Remote {
+public interface AnnuaireInterface extends Remote
+{
     
     public BlagueProviderP2P[] register(BlagueProviderP2P ref) throws RemoteException;
     
