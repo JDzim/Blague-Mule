@@ -4,6 +4,10 @@ import blague.Blague;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+/**
+ * @author Joseph DZIMBALKA
+ * @author Julien RISCHE
+ */
 public interface BlagueProviderP2P extends Remote
 {
     //public void addBlague(Blague b);

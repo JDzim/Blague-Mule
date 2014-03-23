@@ -1,5 +1,9 @@
 package codebase;
 
+/**
+ * @author Joseph DZIMBALKA
+ * @author Julien RISCHE
+ */
 public class BlagueAbsenteException extends Exception 
 {
     public BlagueAbsenteException()
@@ -7,8 +11,8 @@ public class BlagueAbsenteException extends Exception
         super();
     }
     
-    public BlagueAbsenteException(String s)
+    public BlagueAbsenteException(String str)
     {
-        super(s);
+        super(str);
     }
 }

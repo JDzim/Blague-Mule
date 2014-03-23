@@ -2,7 +2,6 @@ package provider;
 
 import java.awt.Dimension;
 import java.rmi.RemoteException;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,6 +14,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import provider.BlagueProvider;
 
+/**
+ * @author Joseph DZIMBALKA
+ * @author Julien RISCHE
+ */
 public class InterfaceGraphique extends JFrame{
 	
 	/**

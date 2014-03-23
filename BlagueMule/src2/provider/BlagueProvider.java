@@ -11,12 +11,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Joseph DZIMBALKA
+ * @author Julien RISCHE
+ */
 public class BlagueProvider implements BlagueProviderP2P
 {
+    
+    //ATTRIBUTS
     private final String nom;
     private final HashMap<String, BlagueProviderP2P> repertoireProxy;
     private final HashMap<String, Blague> listeRef;
     
+    
+    //CONSTRUCTEURS
     public BlagueProvider(String nom)
     {
         this.nom = nom;
@@ -31,16 +39,8 @@ public class BlagueProvider implements BlagueProviderP2P
         this.listeRef = listeRef;
     }
     
-    public void addBlague(Blague blague)
-    {
-        listeRef.put(blague.getNom(), blague);
-    }
     
-    public void addProxy(String nomProxy, BlagueProviderP2P proxy)
-    {
-        repertoireProxy.put(nomProxy, proxy);
-    }
-    
+    //METHODES
     @Override
     public String getNom() throws RemoteException
     {
@@ -83,11 +83,23 @@ public class BlagueProvider implements BlagueProviderP2P
         }
     }
     
+    public void addBlague(Blague blague)
+    {
+        listeRef.put(blague.getNom(), blague);
+    }
+    
+    public void addProxy(String nomProxy, BlagueProviderP2P proxy)
+    {
+        repertoireProxy.put(nomProxy, proxy);
+    }
+    
     public void telechargerBlague(String nomBlague, BlagueProvider proxy) throws BlagueAbsenteException
     {
         listeRef.put(nomBlague, proxy.getBlague(nomBlague));
     }
     
+    
+    //MAIN
     // A TESTER !!
     public static void main(String[] args)
     {
