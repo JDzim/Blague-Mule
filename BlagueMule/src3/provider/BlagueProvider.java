@@ -98,6 +98,16 @@ public class BlagueProvider implements BlagueProviderP2P
         listeRef.put(nomBlague, proxy.getBlague(nomBlague));
     }
     
+    @Override
+    public void notify(BlagueProviderP2P ref) {
+        
+    }
+    
+    @Override
+    public void notifyDeconnect(BlagueProviderP2P ref) {
+        
+    }
+    
     
     //MAIN
     // A TESTER !!
