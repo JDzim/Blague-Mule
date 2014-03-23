@@ -4,6 +4,8 @@ import codebase.AnnuaireInterface;
 import codebase.BlagueProviderP2P;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Joseph DZIMBALKA
@@ -13,13 +15,13 @@ public class Annuaire implements AnnuaireInterface
 {
     
     //ATTRIBUTS
-    private ArrayList<BlagueProviderP2P> listeRef;
+    private final HashMap<String, BlagueProviderP2P> listeRef;
     
     
     //CONSTRUCTEUR
     public Annuaire()
     {
-        this.listeRef = new ArrayList<>();
+        this.listeRef = new HashMap<>();
     }
     
     
@@ -27,12 +29,28 @@ public class Annuaire implements AnnuaireInterface
     @Override
     public BlagueProviderP2P[] register(BlagueProviderP2P ref) throws RemoteException
     {
-        return null;
+        String[] names = ref.getAllName();
+        ArrayList<BlagueProviderP2P> res = new ArrayList<>();
+        BlagueProviderP2P bp;
+        for (String name : names) {
+            bp = listeRef.get(name);
+            if (bp != null) {
+                res.add(bp);
+            }
+        }
+        for (Map.Entry<String, BlagueProviderP2P> entry : listeRef.entrySet()) {
+            entry.getValue().notify(ref);
+        }
+        listeRef.put(ref.getNom(), ref);
+        return (BlagueProviderP2P[]) res.toArray();
     }
     
     @Override
     public void disconnect(BlagueProviderP2P ref) throws RemoteException
     {
-        
+        for (Map.Entry<String, BlagueProviderP2P> entry : listeRef.entrySet()) {
+            entry.getValue().notifyDeconnect(ref);
+        }
+        listeRef.remove(ref.getNom());
     }
 }

@@ -48,7 +48,7 @@ public class BlagueProvider implements BlagueProviderP2P
     }
     
     @Override
-    public String[] getAllName() throws BlagueAbsenteException
+    public String[] getAllName() throws RemoteException
     {
         String[] blagues = new String[0];
         ArrayList<String> al_blagues = new ArrayList();
@@ -61,11 +61,7 @@ public class BlagueProvider implements BlagueProviderP2P
 
         blagues = al_blagues.toArray(blagues);
         
-        
-        if (blagues != null)
-            return blagues;
-        else
-            throw new BlagueAbsenteException("BLAGUE_ABSENTE_EXCEPTION - GetAllName");
+        return blagues;
     }
     
     @Override
@@ -83,11 +79,13 @@ public class BlagueProvider implements BlagueProviderP2P
         }
     }
     
+    @Override
     public void addBlague(Blague blague)
     {
         listeRef.put(blague.getNom(), blague);
     }
     
+    @Override
     public void addProxy(String nomProxy, BlagueProviderP2P proxy)
     {
         repertoireProxy.put(nomProxy, proxy);
@@ -99,15 +97,15 @@ public class BlagueProvider implements BlagueProviderP2P
     }
     
     @Override
-    public void notify(BlagueProviderP2P ref) throws RemoteException
+    public void notify(BlagueProviderP2P proxy) throws RemoteException
     {
-        
+        repertoireProxy.put(proxy.getNom(), proxy);
     }
     
     @Override
-    public void notifyDeconnect(BlagueProviderP2P ref) throws RemoteException
+    public void notifyDeconnect(BlagueProviderP2P proxy) throws RemoteException
     {
-        
+        repertoireProxy.remove(proxy.getNom());
     }
     
     

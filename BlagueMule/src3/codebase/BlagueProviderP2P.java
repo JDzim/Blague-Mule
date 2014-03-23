@@ -16,7 +16,7 @@ public interface BlagueProviderP2P extends Remote
     
     public String getNom() throws RemoteException;
     
-    public String[] getAllName() throws Exception, RemoteException;
+    public String[] getAllName() throws RemoteException;
     
     public Blague getBlague(String nom) throws BlagueAbsenteException, RemoteException;
     

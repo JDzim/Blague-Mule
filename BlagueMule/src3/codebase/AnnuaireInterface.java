@@ -9,7 +9,6 @@ import java.rmi.RemoteException;
  */
 public interface AnnuaireInterface extends Remote
 {
-    
     public BlagueProviderP2P[] register(BlagueProviderP2P ref) throws RemoteException;
     
     public void disconnect(BlagueProviderP2P ref) throws RemoteException;
