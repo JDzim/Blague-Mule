@@ -17,8 +17,9 @@ import provider.BlagueProvider;
  * @author Joseph DZIMBALKA
  * @author Julien RISCHE
  */
-public class InterfaceGraphique extends JFrame{
+public class InterfaceGraphique extends JFrame {
 	
+    //ATTRIBUTS
 	/**
 	 * blague provider observé
 	 */
@@ -42,10 +43,32 @@ public class InterfaceGraphique extends JFrame{
 	 */
 	JList serveurs;
 	
+    
+    //CONSTRUCTEUR
+	/**
+	 * construction de l'interface
+	 */
+	public InterfaceGraphique(String nom, BlagueProvider bp)
+	{
+		super("Blaguemule: "+nom);
+		
+		//mise à jour du lien vers le modele
+		this.bp=bp;
+		
+		//construction de l'interface
+		JTabbedPane onglets=new JTabbedPane();
+		onglets.addTab("local", ongletLocal());
+		onglets.addTab("distant",ongletDistant());
+		
+		//affichage du JFRAME
+		setContentPane(onglets);
+		pack();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+	}
 	
 	
-	
-	
+	//METHODES
 	/**
 	 * ajoute l'onglet distant à l'interface
 	 */
@@ -88,8 +111,6 @@ public class InterfaceGraphique extends JFrame{
 		pdistant.add(distant);
 		return(pdistant);
 	}
-	
-	
 	
 	/**
 	 * ajoute l'onglet local à l'interface
@@ -137,30 +158,6 @@ public class InterfaceGraphique extends JFrame{
 		return(local);
 	}
 	
-	
-	/**
-	 * construction de l'interface
-	 */
-	public InterfaceGraphique(String nom, BlagueProvider bp)
-	{
-		super("Blaguemule: "+nom);
-		
-		//mise à jour du lien vers le modele
-		this.bp=bp;
-		
-		//construction de l'interface
-		JTabbedPane onglets=new JTabbedPane();
-		onglets.addTab("local", ongletLocal());
-		onglets.addTab("distant",ongletDistant());
-		
-		//affichage du JFRAME
-		setContentPane(onglets);
-		pack();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
-	}
-	
-	
 	/**
 	 * methode chargée de mettre à jour l'affichage des blagues
 	 * à partir de bp
@@ -187,13 +184,13 @@ public class InterfaceGraphique extends JFrame{
 	{
 		
 	}
+    
 	
-	
+    //MAIN
 	public static void main (String args[])
 	{
 		InterfaceGraphique test=new InterfaceGraphique("toto",new BlagueProvider("toto"));
 		
 	}
-	
 	
 }
