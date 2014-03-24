@@ -1,7 +1,9 @@
 package provider;
 
+import codebase.BlagueProviderP2P;
 import java.awt.Dimension;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -12,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import provider.BlagueProvider;
 
 /**
  * @author Joseph DZIMBALKA
@@ -165,7 +166,15 @@ public class InterfaceGraphique extends JFrame {
 	 */
 	public void MaJBlagues()
 	{
-		//blaguesLocales
+            try 
+            {
+                //blaguesLocales
+                String[] blagues = bp.getAllName();
+            } catch (RemoteException re) 
+            {
+                System.out.println("RemoteException");
+                re.printStackTrace();
+            }
 	}
 	
 	/**
@@ -175,6 +184,7 @@ public class InterfaceGraphique extends JFrame {
 	public void MaJServeurs()
 	{
 		//serveurs
+                HashMap<String,BlagueProviderP2P> hm = ;
 	}
 	
 	/**
