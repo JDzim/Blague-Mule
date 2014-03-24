@@ -1,8 +1,11 @@
 package provider;
 
 import blague.Blague;
+import codebase.BlagueAbsenteException;
 import codebase.BlagueProviderP2P;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -116,7 +119,32 @@ public class InterfaceGraphique extends JFrame {
 		
 		// bouton de sauvegarde
 		JButton bouton = new JButton("telecharge");
-		distant.add(bouton);
+		
+                bouton.addActionListener
+                (
+                    new ActionListener()
+                    {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) 
+                        {
+                            try 
+                            {
+                                String blague = (String) blaguesDistantes.getSelectedValue();
+                                BlagueProvider proxy = (BlagueProvider) bp.getRepertoireProxy().get((String) serveurs.getSelectedValue());
+                                bp.telechargerBlague(blague, proxy);
+                            } 
+                            catch (BlagueAbsenteException bae) 
+                            {
+                                bae.printStackTrace();
+                            }
+                            
+                            this.notify();
+                            this.notifyAll();
+                        }
+                    }
+                );
+                
+                distant.add(bouton);
 
 		
 		//encapsuler dans un jpanel
@@ -150,20 +178,35 @@ public class InterfaceGraphique extends JFrame {
 				
 		//les informations sur les blagues
 		//nom de la blague
-		JTextField nom=new JTextField();
+		final JTextField nom=new JTextField();
 		blocal.add(nom);
 		
 		//contenu 
-		JTextField question=new JTextField();
+		final JTextField question=new JTextField();
 		blocal.add(question);
 		
 		//reponse
-		JTextArea reponse=new JTextArea();
+		final JTextArea reponse=new JTextArea();
 		reponse.setPreferredSize(new Dimension(300,200));
 		blocal.add(reponse);
 		
 		//bouton de sauvegarde
 		JButton bouton=new JButton("sauve");
+                
+                bouton.addActionListener
+                (
+                    new ActionListener()
+                    {
+                        @Override
+                        public void actionPerformed(ActionEvent ae) 
+                        {
+                            bp.addBlague(new Blague(nom.getText(), question.getText(), reponse.getText()));     
+                            this.notify();
+                            this.notifyAll();
+                        }
+                    }
+                );
+                
 		blocal.add(bouton);
 			
 		local.add(blocal);
