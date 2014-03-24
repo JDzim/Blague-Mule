@@ -175,8 +175,8 @@ public class InterfaceGraphique extends JFrame {
 	public void MaJBlagues()
 	{
                 //blaguesLocales
-//                try
-//                {
+                //try
+                //{
                     String[] blag = bp.getAllName();
                     DefaultListModel dlm = new DefaultListModel();
                     blaguesLocales.removeAll();
@@ -187,12 +187,12 @@ public class InterfaceGraphique extends JFrame {
                     }
 
                     blaguesLocales.setModel(dlm);
-//                }
-//                catch (RemoteException e)
-//                {
-//                    System.out.println("Exception");
-//                    e.printStackTrace();
-//                }
+                //}
+                //catch (RemoteException e)
+                //{
+                //    System.out.println("Exception");
+                //    e.printStackTrace();
+                //}
 	}
 	
 	/**

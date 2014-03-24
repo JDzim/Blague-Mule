@@ -32,11 +32,11 @@ public class BlagueProvider implements BlagueProviderP2P
         this.listeRef = new HashMap<>();
     }
     
-    public BlagueProvider(String nom, HashMap<String,Blague> listeRef)
+    public BlagueProvider(String nom, HashMap<String,Blague> listRef)
     {
         this.nom = nom;
         this.repertoireProxy = new HashMap<>();
-        this.listeRef = listeRef;
+        this.listeRef = listRef;
     }
     
     
