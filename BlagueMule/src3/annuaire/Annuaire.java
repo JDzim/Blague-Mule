@@ -3,6 +3,9 @@ package annuaire;
 import codebase.AnnuaireInterface;
 import codebase.BlagueProviderP2P;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,5 +55,18 @@ public class Annuaire implements AnnuaireInterface
             entry.getValue().notifyDeconnect(ref);
         }
         listeRef.remove(ref.getNom());
+    }
+    
+    //MAIN
+    public static void main(String[] args) {
+        
+        try {
+            Annuaire annuaire = new Annuaire();
+            AnnuaireInterface proxy = (AnnuaireInterface) UnicastRemoteObject.exportObject(annuaire,0);
+            Registry regAnnuaire = LocateRegistry.getRegistry();
+            regAnnuaire.rebind("annuaire", proxy);
+        } catch (RemoteException re) {
+            re.printStackTrace();
+        }
     }
 }
