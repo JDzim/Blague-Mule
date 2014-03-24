@@ -2,10 +2,10 @@
 
 cd ../src3
 
-echo ""
-echo "PACKAGE IHM"
-echo ""
-javac 	-d 	../build/classes 	InterfaceGraphique.java
+#echo ""
+#echo "PACKAGE IHM"
+#echo ""
+#javac 	-d 	../build/classes 	InterfaceGraphique.java
 echo ""
 echo "PACKAGE BLAGUE"
 echo ""
