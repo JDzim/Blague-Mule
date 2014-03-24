@@ -279,6 +279,7 @@ public class InterfaceGraphique extends JFrame {
                 reg.rebind(bp.getNom(),proxy);
                 
                 System.in.read();
+                System.out.println("Enregistrement effectue");
                 
                 for (int i = 1 ; i < args.length ; i++)
                 {
@@ -286,6 +287,9 @@ public class InterfaceGraphique extends JFrame {
                 }
 
                 bp.setRepertoireProxy(autresNomsProviders);
+                
+                System.in.read();
+                System.out.println("Obtention des proxys effectuee");
             }
             catch (Exception e)
             {
