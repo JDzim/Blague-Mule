@@ -133,13 +133,13 @@ public class InterfaceGraphique extends JFrame {
                                 BlagueProvider proxy = (BlagueProvider) bp.getRepertoireProxy().get((String) serveurs.getSelectedValue());
                                 bp.telechargerBlague(blague, proxy);
                             } 
-                            catch (BlagueAbsenteException bae) 
+                            catch (Exception e) 
                             {
-                                bae.printStackTrace();
+                                e.printStackTrace();
                             }
                             
-                            this.notify();
-                            this.notifyAll();
+                            //this.notify();
+                            //this.notifyAll();
                         }
                     }
                 );
@@ -245,9 +245,19 @@ public class InterfaceGraphique extends JFrame {
 	public void MaJServeurs()
 	{
 		//serveurs
-                HashMap<String,BlagueProviderP2P> serv = bp.getRepertoireProxy();
+                
+                HashMap<String,BlagueProviderP2P> serv = null;
                 DefaultListModel dlm = new DefaultListModel();
-                serveurs.removeAll();
+            
+                try
+                {
+                    serv = bp.getRepertoireProxy();
+                    serveurs.removeAll();
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
                 
                 for (Entry<String,BlagueProviderP2P> entry : serv.entrySet())
                 {

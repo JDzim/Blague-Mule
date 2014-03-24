@@ -211,23 +211,15 @@ public class BlagueProvider implements BlagueProviderP2P
         }
     }
 
-//    @Override
-//    public void notify(BlagueProviderP2P ref) throws RemoteException 
-//    {
-//        
-//    }
-//
-//    @Override
-//    public void notifyDeconnect(BlagueProviderP2P ref) throws RemoteException 
-//    {
-//        
-//    }
-
-    public void notify(BlagueProviderP2P ref) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public void notify(BlagueProviderP2P proxy) throws RemoteException
+    {
+        repertoireProxy.put(proxy.getNom(), proxy);
     }
-
-    public void notifyDeconnect(BlagueProviderP2P ref) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    @Override
+    public void notifyDeconnect(BlagueProviderP2P proxy) throws RemoteException
+    {
+        repertoireProxy.remove(proxy.getNom());
     }
 }
