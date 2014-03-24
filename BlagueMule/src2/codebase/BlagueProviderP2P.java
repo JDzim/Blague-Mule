@@ -10,9 +10,9 @@ import java.rmi.RemoteException;
  */
 public interface BlagueProviderP2P extends Remote
 {
-    public void addBlague(Blague b);
+    public void addBlague(Blague b) throws RemoteException;
     
-    public void addProxy(String nomProxy, BlagueProviderP2P proxy);
+    public void addProxy(String nomProxy, BlagueProviderP2P proxy) throws RemoteException;
     
     public String getNom() throws RemoteException;
     

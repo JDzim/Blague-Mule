@@ -276,7 +276,7 @@ public class InterfaceGraphique extends JFrame {
 
                 Registry reg = LocateRegistry.getRegistry();
                 BlagueProviderP2P proxy = (BlagueProviderP2P) UnicastRemoteObject.exportObject(bp,0);
-                reg.rebind(bp.getNom(),proxy);
+                reg.rebind(args[0],proxy);
                 
                 System.in.read();
                 System.out.println("Enregistrement effectue");
