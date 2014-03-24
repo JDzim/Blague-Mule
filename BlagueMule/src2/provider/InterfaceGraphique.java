@@ -171,8 +171,8 @@ public class InterfaceGraphique extends JFrame {
 	public void MaJBlagues()
 	{
                 //blaguesLocales
-                //try
-                //{
+                try
+                {
                     String[] blag = bp.getAllName();
                     DefaultListModel dlm = new DefaultListModel();
                     blaguesLocales.removeAll();
@@ -183,12 +183,12 @@ public class InterfaceGraphique extends JFrame {
                     }
 
                     blaguesLocales.setModel(dlm);
-                //}
-                //catch (RemoteException re)
-                //{
-                //    System.out.println("RemoteException");
-                //    re.printStackTrace();
-                //}
+                }
+                catch (RemoteException e)
+                {
+                    System.out.println("Exception");
+                    e.printStackTrace();
+                }
 	}
 	
 	/**
@@ -217,8 +217,8 @@ public class InterfaceGraphique extends JFrame {
 	public void MaJBlagueDist()
 	{
 		//blaguesDistantes
-                //try
-                //{
+                try
+                {
                     String[] blag = bp.getRepertoireProxy().get(serveurs.getSelectedValue()).getAllName();    
                     DefaultListModel dlm = new DefaultListModel();
                     blaguesDistantes.removeAll();
@@ -229,12 +229,12 @@ public class InterfaceGraphique extends JFrame {
                     }
 
                     blaguesDistantes.setModel(dlm);
-                //}
-                //catch (RemoteException re)
-                //{
-                //    System.out.println("RemoteException");
-                //    re.printStackTrace();
-                //}
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Exception");
+                    e.printStackTrace();
+                }
 	}
 	
 	
