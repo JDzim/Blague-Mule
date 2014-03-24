@@ -9,18 +9,18 @@ cd ../src3
 echo ""
 echo "PACKAGE BLAGUE"
 echo ""
-javac 	-d	../build/classes	blague/*.java
+javac 	-d	../build/classes/bin3	blague/*.java
 echo ""
 echo "PACKAGE CODEBASE"
 echo ""
-javac 	-d 	../build/classes 	codebase/*.java
+javac 	-d 	../build/classes/bin3 	codebase/*.java
 echo ""
 echo "PACKAGE PROVIDER"
 echo ""
-javac 	-d	../build/classes	provider/*.java
+javac 	-d	../build/classes/bin3	provider/*.java
 echo ""
 echo ""
 echo "PACKAGE ANNUAIRE"
 echo ""
-javac 	-d	../build/classes	annuaire/*.java
+javac 	-d	../build/classes/bin3	annuaire/*.java
 echo ""
