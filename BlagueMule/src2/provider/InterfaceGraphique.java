@@ -4,6 +4,7 @@ import blague.Blague;
 import codebase.BlagueProviderP2P;
 import java.awt.Dimension;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -242,17 +243,25 @@ public class InterfaceGraphique extends JFrame {
     //MAIN
 	public static void main (String args[])
 	{
-            BlagueProvider bp = new BlagueProvider(args[0]);
-            InterfaceGraphique test = new InterfaceGraphique(args[0],bp);
-            
-            HashMap<String,BlagueProviderP2P> autresNomsProviders = new HashMap<>();
-
-            for (int i = 1 ; i < args.length ; i++)
+            try
             {
-                autresNomsProviders.put(args[i],(BlagueProviderP2P) LocateRegistry.getRegistry().lookup(args[i]));
+                BlagueProvider bp = new BlagueProvider(args[0]);
+                InterfaceGraphique test = new InterfaceGraphique(args[0],bp);
+
+                HashMap<String,BlagueProviderP2P> autresNomsProviders = new HashMap<>();
+
+                for (int i = 1 ; i < args.length ; i++)
+                {
+                    autresNomsProviders.put(args[i],(BlagueProviderP2P) LocateRegistry.getRegistry().lookup(args[i]));
+                }
+
+                bp.setRepertoireProxy(autresNomsProviders);
             }
-            
-            bp.setRepertoireProxy(autresNomsProviders);
+            catch (Exception e)
+            {
+                System.out.println("Exception");
+                e.printStackTrace();
+            }
 	}
 	
 }
