@@ -47,10 +47,20 @@ public class BlagueProvider implements BlagueProviderP2P
         return nom;
     }
     
-    @Override
-    public String[] getAllName() throws BlagueAbsenteException
+    public HashMap<String,Blague> getListeRef()
     {
-        String[] blagues = new String[0];
+        return listeRef;
+    }
+    
+    public HashMap<String,BlagueProviderP2P> getRepertoireProxy()
+    {
+        return repertoireProxy;
+    }
+    
+    @Override
+    public String[] getAllName()
+    {
+        String[] blagues = null;
         ArrayList<String> al_blagues = new ArrayList();
         
         
@@ -61,11 +71,7 @@ public class BlagueProvider implements BlagueProviderP2P
 
         blagues = al_blagues.toArray(blagues);
         
-        
-        if (blagues != null)
-            return blagues;
-        else
-            throw new BlagueAbsenteException("BLAGUE_ABSENTE_EXCEPTION - GetAllName");
+        return blagues;
     }
     
     @Override
@@ -199,5 +205,17 @@ public class BlagueProvider implements BlagueProviderP2P
             System.out.println("Exception");
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void notify(BlagueProviderP2P ref) throws RemoteException 
+    {
+        
+    }
+
+    @Override
+    public void notifyDeconnect(BlagueProviderP2P ref) throws RemoteException 
+    {
+        
     }
 }
