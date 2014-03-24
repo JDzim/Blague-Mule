@@ -10,6 +10,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -175,9 +177,9 @@ public class InterfaceGraphique extends JFrame {
 	public void MaJBlagues()
 	{
                 //blaguesLocales
-                //try
-                //{
-                    String[] blag = bp.getAllName();
+                String[] blag;
+                try {
+                    blag = bp.getAllName();
                     DefaultListModel dlm = new DefaultListModel();
                     blaguesLocales.removeAll();
 
@@ -187,12 +189,10 @@ public class InterfaceGraphique extends JFrame {
                     }
 
                     blaguesLocales.setModel(dlm);
-                //}
-                //catch (RemoteException e)
-                //{
-                //    System.out.println("Exception");
-                //    e.printStackTrace();
-                //}
+                } catch (RemoteException re) {
+                    re.printStackTrace();
+                }
+                
 	}
 	
 	/**

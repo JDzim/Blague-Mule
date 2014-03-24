@@ -63,19 +63,18 @@ public class BlagueProvider implements BlagueProviderP2P
     }
     
     @Override
-    public String[] getAllName()
+    public String[] getAllName() throws RemoteException
     {
         String[] blagues = null;
-        ArrayList<String> al_blagues = new ArrayList();
         
-        
-        for (Map.Entry<String,Blague> e : listeRef.entrySet())
-        {
-            al_blagues.add(e.getKey());
+        if (listeRef.size() > 0) {
+            blagues = new String[listeRef.size()];
+            int i = 0;
+            for (String nomBlague : listeRef.keySet()) {
+                blagues[i] = nomBlague;
+                i++;
+            }
         }
-
-        blagues = al_blagues.toArray(blagues);
-        
         return blagues;
     }
     
