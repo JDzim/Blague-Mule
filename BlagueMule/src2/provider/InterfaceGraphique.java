@@ -5,6 +5,8 @@ import codebase.BlagueProviderP2P;
 import java.awt.Dimension;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -245,14 +247,42 @@ public class InterfaceGraphique extends JFrame {
 	{
             try
             {
-                BlagueProvider bp = new BlagueProvider(args[0]);
+                String titre1 = "";
+                String titre2 = "";
+                String titre3 = "";
+                
+                if (args[0].compareTo("prov1") == 0) 
+                {
+                    titre1 = "AAAAA";
+                    titre2 = "BBBBB";
+                    titre3 = "CCCCC";
+                }
+                if (args[0].compareTo("prov2") == 0) 
+                {
+                    titre1 = "XXXXX";
+                    titre2 = "YYYYY";
+                    titre3 = "ZZZZZ";
+                }
+                
+                HashMap<String,Blague> listeBlagues = new HashMap();
+                listeBlagues.put(titre1, new Blague(titre1,"Qui suis-je ?","Une 1ere blague !"));
+                listeBlagues.put(titre2, new Blague(titre2,"Qui suis-je ?","Une 2nde blague !"));
+                listeBlagues.put(titre3, new Blague(titre3,"Qui suis-je ?","Une 3eme blague !"));
+                
+                BlagueProvider bp = new BlagueProvider(args[0],listeBlagues);
                 InterfaceGraphique test = new InterfaceGraphique(args[0],bp);
 
                 HashMap<String,BlagueProviderP2P> autresNomsProviders = new HashMap<>();
 
+                Registry reg = LocateRegistry.getRegistry();
+                BlagueProviderP2P proxy = (BlagueProviderP2P) UnicastRemoteObject.exportObject(bp,0);
+                reg.rebind(bp.getNom(),proxy);
+                
+                System.in.read();
+                
                 for (int i = 1 ; i < args.length ; i++)
                 {
-                    autresNomsProviders.put(args[i],(BlagueProviderP2P) LocateRegistry.getRegistry().lookup(args[i]));
+                    autresNomsProviders.put(args[i],(BlagueProviderP2P) reg.lookup(args[i]));
                 }
 
                 bp.setRepertoireProxy(autresNomsProviders);
