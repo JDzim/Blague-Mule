@@ -211,13 +211,13 @@ public class BlagueProvider implements BlagueProviderP2P
         }
     }
 
-    @Override
+    //@Override
     public void notify(BlagueProviderP2P proxy) throws RemoteException
     {
         repertoireProxy.put(proxy.getNom(), proxy);
     }
     
-    @Override
+    //@Override
     public void notifyDeconnect(BlagueProviderP2P proxy) throws RemoteException
     {
         repertoireProxy.remove(proxy.getNom());
