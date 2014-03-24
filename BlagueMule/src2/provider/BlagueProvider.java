@@ -20,7 +20,7 @@ public class BlagueProvider implements BlagueProviderP2P
     
     //ATTRIBUTS
     private final String nom;
-    private final HashMap<String, BlagueProviderP2P> repertoireProxy;
+    private HashMap<String, BlagueProviderP2P> repertoireProxy;
     private final HashMap<String, Blague> listeRef;
     
     
@@ -55,6 +55,11 @@ public class BlagueProvider implements BlagueProviderP2P
     public HashMap<String,BlagueProviderP2P> getRepertoireProxy()
     {
         return repertoireProxy;
+    }
+    
+    public void setRepertoireProxy(HashMap<String,BlagueProviderP2P> rp)
+    {
+        repertoireProxy = rp;
     }
     
     @Override
