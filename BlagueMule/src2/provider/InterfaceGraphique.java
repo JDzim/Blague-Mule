@@ -270,7 +270,7 @@ public class InterfaceGraphique extends JFrame {
                 listeBlagues.put(titre3, new Blague(titre3,"Qui suis-je ?","Une 3eme blague !"));
                 
                 BlagueProvider bp = new BlagueProvider(args[0],listeBlagues);
-                InterfaceGraphique test = new InterfaceGraphique(args[0],bp);
+                InterfaceGraphique ihm = new InterfaceGraphique(args[0],bp);
 
                 HashMap<String,BlagueProviderP2P> autresNomsProviders = new HashMap<>();
 
