@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ../src2
+cd ../src3
 
 echo ""
 echo "PACKAGE IHM"
@@ -19,4 +19,8 @@ echo "PACKAGE PROVIDER"
 echo ""
 javac 	-d	../build/classes	provider/*.java
 echo ""
-
+echo ""
+echo "PACKAGE ANNUAIRE"
+echo ""
+javac 	-d	../build/classes	annuaire/*.java
+echo ""
