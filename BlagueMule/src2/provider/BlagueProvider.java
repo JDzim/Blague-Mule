@@ -223,12 +223,10 @@ public class BlagueProvider implements BlagueProviderP2P
 //        
 //    }
 
-    @Override
     public void notify(BlagueProviderP2P ref) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public void notifyDeconnect(BlagueProviderP2P ref) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
