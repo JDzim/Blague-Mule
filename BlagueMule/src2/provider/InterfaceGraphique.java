@@ -170,16 +170,24 @@ public class InterfaceGraphique extends JFrame {
 	public void MaJBlagues()
 	{
                 //blaguesLocales
-                String[] blag = bp.getAllName();
-                DefaultListModel dlm = new DefaultListModel();
-                blaguesLocales.removeAll();
-                
-                for (String s : blag)
+                try
                 {
-                    dlm.addElement(s);
+                    String[] blag = bp.getAllName();
+                    DefaultListModel dlm = new DefaultListModel();
+                    blaguesLocales.removeAll();
+
+                    for (String s : blag)
+                    {
+                        dlm.addElement(s);
+                    }
+
+                    blaguesLocales.setModel(dlm);
                 }
-                
-                blaguesLocales.setModel(dlm);
+                catch (RemoteException re)
+                {
+                    System.out.println("RemoteException");
+                    re.printStackTrace();
+                }
 	}
 	
 	/**
@@ -208,16 +216,24 @@ public class InterfaceGraphique extends JFrame {
 	public void MaJBlagueDist()
 	{
 		//blaguesDistantes
-                String[] blag = bp.getRepertoireProxy().get(serveurs.getSelectedValue()).getAllName();    
-                DefaultListModel dlm = new DefaultListModel();
-                blaguesDistantes.removeAll();
-                
-                for (String s : blag)
+                try
                 {
-                    dlm.addElement(s);
+                    String[] blag = bp.getRepertoireProxy().get(serveurs.getSelectedValue()).getAllName();    
+                    DefaultListModel dlm = new DefaultListModel();
+                    blaguesDistantes.removeAll();
+
+                    for (String s : blag)
+                    {
+                        dlm.addElement(s);
+                    }
+
+                    blaguesDistantes.setModel(dlm);
                 }
-                
-                blaguesDistantes.setModel(dlm);
+                catch (RemoteException re)
+                {
+                    System.out.println("RemoteException");
+                    re.printStackTrace();
+                }
 	}
 	
 	
