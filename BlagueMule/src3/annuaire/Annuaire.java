@@ -65,6 +65,7 @@ public class Annuaire implements AnnuaireInterface
             AnnuaireInterface proxy = (AnnuaireInterface) UnicastRemoteObject.exportObject(annuaire,0);
             Registry regAnnuaire = LocateRegistry.getRegistry();
             regAnnuaire.rebind("annuaire", proxy);
+            while (true) {}
         } catch (RemoteException re) {
             re.printStackTrace();
         }
