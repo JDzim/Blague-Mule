@@ -207,15 +207,15 @@ public class BlagueProvider implements BlagueProviderP2P
         }
     }
 
-    @Override
-    public void notify(BlagueProviderP2P ref) throws RemoteException 
-    {
-        
-    }
-
-    @Override
-    public void notifyDeconnect(BlagueProviderP2P ref) throws RemoteException 
-    {
-        
-    }
+//    @Override
+//    public void notify(BlagueProviderP2P ref) throws RemoteException 
+//    {
+//        
+//    }
+//
+//    @Override
+//    public void notifyDeconnect(BlagueProviderP2P ref) throws RemoteException 
+//    {
+//        
+//    }
 }
