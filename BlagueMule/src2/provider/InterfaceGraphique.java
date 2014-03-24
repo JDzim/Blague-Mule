@@ -1,11 +1,14 @@
 package provider;
 
+import blague.Blague;
 import codebase.BlagueProviderP2P;
 import java.awt.Dimension;
 import java.rmi.RemoteException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -166,15 +169,17 @@ public class InterfaceGraphique extends JFrame {
 	 */
 	public void MaJBlagues()
 	{
-            try 
-            {
                 //blaguesLocales
-                String[] blagues = bp.getAllName();
-            } catch (RemoteException re) 
-            {
-                System.out.println("RemoteException");
-                re.printStackTrace();
-            }
+                String[] blag = bp.getAllName();
+                DefaultListModel dlm = new DefaultListModel();
+                blaguesLocales.removeAll();
+                
+                for (String s : blag)
+                {
+                    dlm.addElement(s);
+                }
+                
+                blaguesLocales.setModel(dlm);
 	}
 	
 	/**
@@ -184,7 +189,16 @@ public class InterfaceGraphique extends JFrame {
 	public void MaJServeurs()
 	{
 		//serveurs
-                HashMap<String,BlagueProviderP2P> hm = ;
+                HashMap<String,BlagueProviderP2P> serv = bp.getRepertoireProxy();
+                DefaultListModel dlm = new DefaultListModel();
+                serveurs.removeAll();
+                
+                for (Entry<String,BlagueProviderP2P> entry : serv.entrySet())
+                {
+                    dlm.addElement(entry.getKey());
+                }
+                
+                serveurs.setModel(dlm);
 	}
 	
 	/**
@@ -194,6 +208,16 @@ public class InterfaceGraphique extends JFrame {
 	public void MaJBlagueDist()
 	{
 		//blaguesDistantes
+                String[] blag = bp.getRepertoireProxy().get(serveurs.getSelectedValue()).getAllName();    
+                DefaultListModel dlm = new DefaultListModel();
+                blaguesDistantes.removeAll();
+                
+                for (String s : blag)
+                {
+                    dlm.addElement(s);
+                }
+                
+                blaguesDistantes.setModel(dlm);
 	}
 	
 	
