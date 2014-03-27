@@ -220,7 +220,7 @@ public class InterfaceGraphique extends JFrame {
 	{
                 //blaguesLocales
                 String[] blag;
-//                try {
+                try {
                     blag = bp.getAllName();
                     DefaultListModel dlm = new DefaultListModel();
                     blaguesLocales.removeAll();
@@ -231,9 +231,9 @@ public class InterfaceGraphique extends JFrame {
                     }
 
                     blaguesLocales.setModel(dlm);
-//                } catch (RemoteException re) {
-//                    re.printStackTrace();
-//                }
+                } catch (RemoteException re) {
+                    re.printStackTrace();
+                }
                 
 	}
 	
